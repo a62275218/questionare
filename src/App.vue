@@ -11,6 +11,7 @@ export default {
 </script>
 <style>
   #app{
-    background: black;
+    //background: black;
+    height:100vh
   }
 </style>

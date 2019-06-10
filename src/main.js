@@ -4,9 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
+import swiper from 'vue-awesome-swiper'
 import './css/reset.css'
+import 'swiper/dist/css/swiper.css'
 
-
+Vue.use(swiper);
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false

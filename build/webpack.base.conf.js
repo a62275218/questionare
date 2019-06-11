@@ -39,7 +39,8 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
+        exclude: /NIM_Web_SDK.*\.js/
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -68,9 +69,6 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ["style", "css", "sass"]
-      },{
-        test: /.exec.js$/,
-        use: [ 'script-loader' ]
       }
     ]
   },

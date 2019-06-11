@@ -1,21 +1,55 @@
 <template>
-
+  <div class="container">
+    <div class="block" v-for="(item,idx) in data" :key="idx">
+      <div class="title">{{idx+1 +' '+item.title}}</div>
+      <div v-for="i in item.model">
+        {{i}}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+  import SDK from '../assets/NIM_Web_SDK_v6.5.0'
   export default {
     name: "Receiver",
+    data(){
+      return {
+        data:[]
+      }
+    },
     mounted(){
-      window.addEventListener("message", this.receiveMessage, false);
+      const _this = this;
+      let nim = SDK.NIM.getInstance({
+        appKey: 'd8201c00ad3022a6bae5d14954b30605',
+        account: 'b62275218',
+        token: '6d251e4e84965f4fcf10b097be3600c5',
+        onconnect:function(){
+          console.log('SDK连接成功')
+        },
+        onerror:function(err){
+          console.log(err)
+        },
+        oncustomsysmsg:function(sysMsg) {
+          console.log('收到系统通知', sysMsg);
+          _this.data = JSON.parse(sysMsg.content);
+        }
+      })
     },
     methods:{
-      receiveMessage:function(message){
-        console.log(message)
-      }
     }
   }
 </script>
 
 <style scoped>
-
+  .container{
+    padding:10px 20px;
+  }
+  .block{
+    padding:20px;
+  }
+  .title{
+    margin-left:-14px;
+    margin-bottom: 10px;
+  }
 </style>

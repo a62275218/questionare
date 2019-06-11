@@ -1,39 +1,41 @@
 <template>
-  <swiper :options="swiperOption" ref="mySwiper">
-    <swiper-slide v-for="(item,idx) in questionList" :key="idx" class="swiper-slide">
-      <div :class="['question-card',{'question-card-hide':hide}]">
-        <div :class="['inner-card',{'inner-card-hide':hide}]">
-          <div class="inner-border"></div>
-          <div class="text-wrapper">
-            <div :class="['title',{hide:hide}]">
-              {{idx+1+'. ' + item.title}}
-            </div>
-            <!--begin 复选框-->
-            <el-checkbox-group
-              v-model="item.model"
-              @change="e=>handleChange(e,item)"
-            >
-              <el-checkbox
-                v-for="(option,i) in item.options"
-                :label="option.label"
-                :key="option.label"
-                :class="{'check-box-hide':hide}"
-                :style="`transition:all 0.5s ease-in-out ${1+i/10}s`"
+  <iframe>
+    <swiper :options="swiperOption" ref="mySwiper">
+      <swiper-slide v-for="(item,idx) in questionList" :key="idx" class="swiper-slide">
+        <div :class="['question-card',{'question-card-hide':hide}]">
+          <div :class="['inner-card',{'inner-card-hide':hide}]">
+            <div class="inner-border"></div>
+            <div class="text-wrapper">
+              <div :class="['title',{hide:hide}]">
+                {{idx+1+'. ' + item.title}}
+              </div>
+              <!--begin 复选框-->
+              <el-checkbox-group
+                v-model="item.model"
+                @change="e=>handleChange(e,item)"
               >
-                {{option.label}}
-              </el-checkbox>
-            </el-checkbox-group>
-            <!--end 复选框-->
+                <el-checkbox
+                  v-for="(option,i) in item.options"
+                  :label="option.label"
+                  :key="option.label"
+                  :class="{'check-box-hide':hide}"
+                  :style="`transition:all 0.5s ease-in-out ${1+i/10}s`"
+                >
+                  {{option.label}}
+                </el-checkbox>
+              </el-checkbox-group>
+              <!--end 复选框-->
+            </div>
           </div>
         </div>
-      </div>
-      <div :class="['top-left-sunlight',{'top-left-sunlight-hide':hide}]"></div>
-      <div :class="['center-feather',{'center-feather-hide':hide}]"></div>
-      <div :class="['bot-left-feather',{'bot-left-feather-hide':hide}]"></div>
-      <div :class="['bot-right-feather',{'bot-right-feather-hide':hide}]"></div>
-    </swiper-slide>
-    <div class="swiper-scrollbar" slot="scrollbar"></div>
-  </swiper>
+        <div :class="['top-left-sunlight',{'top-left-sunlight-hide':hide}]"></div>
+        <div :class="['center-feather',{'center-feather-hide':hide}]"></div>
+        <div :class="['bot-left-feather',{'bot-left-feather-hide':hide}]"></div>
+        <div :class="['bot-right-feather',{'bot-right-feather-hide':hide}]"></div>
+      </swiper-slide>
+      <div class="swiper-scrollbar" slot="scrollbar"></div>
+    </swiper>
+  </iframe>
 </template>
 
 <script>
@@ -42,20 +44,19 @@
     data() {
       const _this = this;
       return {
-        hide:true,
+        hide: true,
         swiperOption: {
           direction: 'vertical',
-          on:{
-            init:function(){
-              console.log('init');
+          on: {
+            init: function () {
               _this.hide = false;
             },
-            transitionStart: function(){
+            transitionStart: function () {
               _this.hide = true;
+              window.postMessage('123', 'http://localhost:8081/receiver')
             },
-            transitionEnd:function(){
+            transitionEnd: function () {
               _this.hide = false;
-              console.log('end')
             }
           },
           scrollbar: {
@@ -114,7 +115,7 @@
         ]
       }
     },
-    computed:{
+    computed: {
       swiper() {
         return this.$refs.mySwiper.swiper
       }
@@ -156,23 +157,25 @@
     justify-content: center;
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187849.png@!user_image_700x1");
     background-size: cover;
-    position:relative;
+    position: relative;
 
-    .question-card-hide{
-      transform: translate3d(-200%,0,0);
-      transition:none !important;
+    .question-card-hide {
+      transform: translate3d(-200%, 0, 0);
+      transition: none !important;
     }
+
     .question-card {
       width: calc(100% - 60px);
       height: 70%;
       background: rgba(255, 255, 255, 0.3);
       z-index: 100;
-      transition:all 0.5s ease-in-out 0.5s;
+      transition: all 0.5s ease-in-out 0.5s;
 
-      .inner-card-hide{
-        transform: translate3d(400%,-50%,0) !important;
-        transition:none !important;
+      .inner-card-hide {
+        transform: translate3d(400%, -50%, 0) !important;
+        transition: none !important;
       }
+
       .inner-card {
         position: relative;
         top: 50%;
@@ -190,7 +193,7 @@
         padding: 20px;
         box-shadow: 0 0 20px #a2a2a2;
         overflow: hidden;
-        transition:all 0.5s ease-in-out 0.5s;
+        transition: all 0.5s ease-in-out 0.5s;
 
         .inner-border {
           position: absolute;
@@ -210,22 +213,23 @@
     height: calc(100% - 80px);
     z-index: 2000;
 
-    .hide{
-      transform: translate3d(0,-180%,0);
-      transition:none !important;
+    .hide {
+      transform: translate3d(0, -180%, 0);
+      transition: none !important;
     }
 
     .title {
       font-size: 18px;
       padding-bottom: 20px;
-      transition:all 0.5s ease-in-out 1s;
+      transition: all 0.5s ease-in-out 1s;
     }
   }
 
-  .top-left-sunlight-hide{
-    transform: translate3d(0,-100%,0) rotate(180deg) scale(2.5) !important;
-    transition:none !important;
+  .top-left-sunlight-hide {
+    transform: translate3d(0, -100%, 0) rotate(180deg) scale(2.5) !important;
+    transition: none !important;
   }
+
   .top-left-sunlight {
     position: absolute;
     top: 10%;
@@ -233,16 +237,17 @@
     width: 100%;
     height: 220px;
     transform: rotate(180deg) scale(2.5);
-    background:no-repeat url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187619.png@!user_image_700x1");
+    background: no-repeat url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187619.png@!user_image_700x1");
     background-size: cover;
-    transition:all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
 
-  .center-feather-hide{
-    transform:scale(0.2);
-    transition:none !important;
-    opacity:0.2 !important;
+  .center-feather-hide {
+    transform: scale(0.2);
+    transition: none !important;
+    opacity: 0.2 !important;
   }
+
   .center-feather {
     position: absolute;
     top: -40%;
@@ -251,15 +256,16 @@
     height: 100%;
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187847.png@!user_image_700x1");
     background-size: cover;
-    transition:all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
 
-  .bot-left-feather-hide{
-    transform:rotate(-90deg);
-    transition:none !important;
+  .bot-left-feather-hide {
+    transform: rotate(-90deg);
+    transition: none !important;
     left: -50% !important;
     opacity: 0;
   }
+
   .bot-left-feather {
     position: absolute;
     bottom: 0;
@@ -268,15 +274,16 @@
     height: 251px;
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187886.png@!user_image_700x1");
     background-size: cover;
-    transition:all 1.5s ease-in-out 0.5s;
+    transition: all 1.5s ease-in-out 0.5s;
   }
 
-  .bot-right-feather-hide{
-    transform:rotate(90deg) !important;
-    transition:none !important;
+  .bot-right-feather-hide {
+    transform: rotate(90deg) !important;
+    transition: none !important;
     right: -100% !important;
     opacity: 0.1 !important;
   }
+
   .bot-right-feather {
     position: absolute;
     bottom: 0;
@@ -286,7 +293,7 @@
     transform: rotate(30deg);
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187990.png@!user_image_700x1");
     background-size: cover;
-    transition:all 1.5s ease-in-out 0.5s;
+    transition: all 1.5s ease-in-out 0.5s;
   }
 
   .swiper-scrollbar-drag {
@@ -299,11 +306,12 @@
     flex-direction: column;
   }
 
-  .check-box-hide{
-    transform:translate3d(-200%,0,0);
-    transition:none !important;
+  .check-box-hide {
+    transform: translate3d(-200%, 0, 0);
+    transition: none !important;
   }
-  .el-checkbox{
+
+  .el-checkbox {
     border: 1px solid #798dc0;
     border-radius: 2px;
     background: rgba(255, 255, 255, 1) !important;
@@ -316,7 +324,7 @@
       visibility: hidden;
     }
 
-    .el-checkbox__input{
+    .el-checkbox__input {
       &:after {
         background: no-repeat center url(https://oss3.rabbitpre.com/rp2/apps/static/widget/pageManagement/checkbox-bg_66eca2a.png);
         background-size: 96% 90%;
@@ -324,7 +332,7 @@
       }
     }
 
-    .is-checked{
+    .is-checked {
       &:before {
         z-index: 9000;
         background: url(https://oss3.rabbitpre.com/rp2/apps/static/widget/pageManagement/checkbox-bg-h_fc9d504.png);

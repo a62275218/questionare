@@ -3,7 +3,7 @@
     <div class="block" v-for="(item,idx) in data" :key="idx">
       <div class="title">{{idx+1 +' '+item.title}}</div>
       <div class="content" v-for="i in item.model">
-        {{i}}
+        {{i.label}}
       </div>
     </div>
   </div>

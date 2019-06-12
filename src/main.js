@@ -5,12 +5,15 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import swiper from 'vue-awesome-swiper'
+import Vant from 'vant';
+
 import './css/reset.css'
 import 'swiper/dist/css/swiper.css'
-
+import 'vant/lib/index.css';
 
 Vue.use(swiper);
 Vue.use(ElementUI);
+Vue.use(Vant);
 
 Vue.config.productionTip = false
 

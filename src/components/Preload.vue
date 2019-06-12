@@ -46,7 +46,6 @@
 
 <style scoped>
   .navigator{
-    font-family: "Qian Kun";
     position:absolute;
     top:50%;
     transform:translate(0,-50%);
@@ -62,9 +61,11 @@
   .title{
     margin:0 auto;
     font-size:.8rem;
+    font-family: "Qian Kun";
   }
   .content{
     padding:.7rem;
+    font-family: "Qian Kun";
   }
   .hide{
     opacity:0;
@@ -82,9 +83,10 @@
   }
   .confirm{
     margin-top:1rem;
-    border:.01rem solid #fff;
+    border:.04rem solid #fff;
     padding:.2rem;
     border-radius:.2rem;
     transition:all 1s ease-in-out 3s;
+    font-family: "Qian Kun";
   }
 </style>

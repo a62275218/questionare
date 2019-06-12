@@ -21,13 +21,15 @@ export default {
     font-family: 'Qian Kun';
     src:url('./assets/qiankun.ttf')
   }
+  body{
+    height:100vh;
+  }
   #app{
     text-align: left;
     font-weight: 700;
-    font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
     -webkit-font-smoothing: antialiased;
-    height:100vh;
     color: #798dc1;
+    height:100%;
     background: black;
   }
 </style>

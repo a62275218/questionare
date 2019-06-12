@@ -379,26 +379,28 @@
     background-size: cover;
     font-size: 0.4rem;
     height:100%;
+    font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
   }
 
   .swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187849.png@!user_image_700x1");
     background-size: cover;
     position: relative;
 
     .question-card-hide {
-      transform: translate3d(-200%, 0, 0);
+      transform: translate3d(-200%, -50%, 0);
       transition: none !important;
     }
 
     .question-card {
       width: calc(100% - 1rem);
-      height: calc(100% - 3rem);
+      height: 14rem;
       background: rgba(255, 255, 255, 0.3);
       z-index: 100;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate3d(-50%,-50%,0);
       transition: all 0.5s ease-in-out 0.5s;
 
       .inner-card-hide {

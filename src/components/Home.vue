@@ -4,7 +4,7 @@
       <div :class="['question-card',{'question-card-hide':hide}]">
         <div :class="['inner-card',{'inner-card-hide':hide}]">
           <div class="inner-border"></div>
-          <img v-show="item.model.length && idx!==questionList.length-1" class="nextBtn" src="../assets/down.png"  alt=""/>
+          <img v-show="item.model.length && idx!==questionList.length-1 && !complete" class="nextBtn" src="../assets/down.png"  alt=""/>
           <div
             class="submit-btn"
             v-show="idx===questionList.length-1 && !complete && item.model.length"
@@ -15,7 +15,8 @@
           <div :class="['complete',{'complete-hide':!complete}]"></div>
           <div class="text-wrapper">
             <div :class="['title',{hide:hide}]">
-              {{idx+1+'. ' + item.title}}
+              <div>{{idx+1}}.</div>
+              <div>{{item.title}}</div>
             </div>
             <!--begin 复选框-->
             <el-checkbox-group
@@ -27,7 +28,7 @@
                 :label="option.label"
                 :key="option.label"
                 :class="{'check-box-hide':hide}"
-                :style="`transition:all 0.5s ease-in-out ${1+i/10}s;${option.label.length>10?'text-align:center':''}`"
+                :style="`transition:all 0.5s ease-in-out ${1+i/10}s;${option.label.length>14?'text-align:center':''}`"
               >
                 {{option.label}}
               </el-checkbox>
@@ -78,12 +79,6 @@
             },
             transitionStart: function () {
               _this.hide = true;
-              function pushMsg(msgs) {
-                if (!Array.isArray(msgs)) { msgs = [msgs]; }
-                let sessionId = msg[0].scene + '-' + msgs[0].account;
-                data.msgs = data.msgs || {};
-                data.msgs[sessionId] = nim.mergeMsgs(data.msgs[sessionId], msgs);
-              }
               let msgId = nim.sendCustomSysMsg({
                 scene: 'p2p',
                 to: 'b62275218',
@@ -172,11 +167,17 @@
               {
                 label: '许嵩(Vae)',
               },
+              {
+                label:'音阙诗听'
+              },
+              {
+                label:'毛不易'
+              }
             ],
             model: []
           },
           {
-            title: '看上了一款卡地亚首饰，但是发现施华洛世奇有一款差不多的，价格便宜得多，你会?',
+            title: '看上了一款卡地亚首饰，但是发现施华洛世奇有一款价格便宜得多的也不错，你会?',
             type: 'radio',
             options: [
               {
@@ -189,7 +190,7 @@
             model: []
           },
           {
-            title: "每月一次血崩中，和男朋友哭诉，结果换来一句'多喝热水'，怎么办？",
+            title: "每月一次血崩中，和男朋友哭诉，结果换来一句'多喝热水'",
             type: 'radio',
             options: [
               {
@@ -205,7 +206,7 @@
             model: []
           },
           {
-            title: '和男朋友相处久了，发现对方是个沙雕，该怎么办？',
+            title: '和男朋友相处久了，发现对方是个沙雕',
             type: 'radio',
             options: [
               {
@@ -227,23 +228,45 @@
             model: []
           },
           {
-            title: '和男朋友相处久了，发现对方是个沙雕，该怎么办？',
+            title: '上班回家看到男朋友在家打游戏',
             type: 'radio',
             options: [
               {
-                label: '巧了，我也是',
+                label: '一口盐汽水喷死他',
               },
               {
-                label: '不和沙雕做朋友',
+                label: '当然是一起玩了',
               },
               {
-                label: '能怎么办？只能忍了',
+                label: '想方设法转移他注意力',
               },
               {
-                label: '无所谓',
+                label: '苦心规劝',
+              }
+            ],
+            model: []
+          },
+          {
+            title: '最近上映的电影，对哪些比较感兴趣？',
+            type: 'checkbox',
+            options: [
+              {
+                label: '哥斯拉2',
               },
               {
-                label: '沙雕是什么？',
+                label: '皮卡丘大侦探',
+              },
+              {
+                label: '复仇者联盟4',
+              },
+              {
+                label: '蜘蛛侠:营销远征',
+              },
+              {
+                label: '全职高手之巅峰荣耀',
+              },
+              {
+                label: '哆啦A梦:大雄的月球探险记',
               }
             ],
             model: []
@@ -262,6 +285,17 @@
         if (item.type === 'radio' && item.model.length > 1) {
           item.model = [e[1]];
         }
+        const _this = this;
+        let msgId = nim.sendCustomSysMsg({
+          scene: 'p2p',
+          to: 'b62275218',
+          content:JSON.stringify(_this.questionList),
+          sendToOnlineUsersOnly: false,
+          done: function(error, msg){
+            if(error) console.log(error);
+          }
+        });
+        console.log('正在发送p2p自定义系统通知');
       },
       submit(){
         this.complete = true;
@@ -289,9 +323,9 @@
     position: absolute;
     display: block;
     box-sizing: border-box;
-    height: 20px;
+    height: 0.4rem;
     content: '';
-    width: 20px;
+    width: 0.4rem;
     top: 50%;
     transform: translate(0, -50%);
   }
@@ -300,6 +334,7 @@
     height: 100vh;
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187136.png@!user_image_700x1");
     background-size: cover;
+    font-size:0.4rem;
   }
 
   .swiper-slide {
@@ -316,8 +351,8 @@
     }
 
     .question-card {
-      width: calc(100% - 60px);
-      height: 70%;
+      width: calc(100% - 1rem);
+      height: 15rem;
       background: rgba(255, 255, 255, 0.3);
       z-index: 100;
       transition: all 0.5s ease-in-out 0.5s;
@@ -334,15 +369,15 @@
         background: #fff;
         filter: opacity(0.6);
         transform: translate(-50%, -50%);
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
+        width: calc(100% - 1rem);
+        height: calc(100% - 1rem);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         box-sizing: border-box;
-        padding: 20px;
-        box-shadow: 0 0 20px #a2a2a2;
+        padding: 0.2rem;
+        box-shadow: 0 0 0.5rem #a2a2a2;
         overflow: hidden;
         transition: all 0.5s ease-in-out 0.5s;
 
@@ -350,13 +385,14 @@
           position: absolute;
           left: 50%;
           bottom:0;
-          width:70px;
-          height:40px;
+          width:2rem;
+          height:1rem;
           transform: translate(-50%, 0);
           z-index:9000;
           transition:all 2s ease-in-out;
           animation:updown 2s infinite;
-          padding:40px;
+          padding:1rem;
+          opacity:0.6;
         }
         .submit-btn{
           position: absolute;
@@ -364,16 +400,16 @@
           bottom:0;
           transform: translate(-50%, -100%);
           transition:all 2s ease-in-out;
-          height: 40px;
-          line-height:40px;
-          width: 80px;
+          height: 1rem;
+          line-height:1rem;
+          width: 2rem;
           text-align: center;
-          font-size: 24px;
+          font-size: 0.4rem;
           font-weight: bold;
-          border-radius: 5px;
-          border: 2px solid #798dc0;
+          border-radius: 0.2rem;
+          border: 0.02rem solid #798dc0;
           z-index:9000;
-          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.2);
         }
         .complete-hide{
           opacity:0;
@@ -383,8 +419,8 @@
           position: absolute;
           left: 50%;
           bottom:0;
-          height: 40px;
-          width: 140px;
+          height: 1.3rem;
+          width: 5rem;
           transform: translate(-50%, -50%);
           background-image:url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187500.png@!user_image_700x1");
           background-size:cover;
@@ -395,9 +431,9 @@
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: calc(100% - 10px);
-          height: calc(100% - 10px);
-          border: 1px solid #d2dee4;
+          width: calc(100% - 0.5rem);
+          height: calc(100% - 0.5rem);
+          border: 0.05rem solid #d2dee4;
         }
       }
     }
@@ -415,9 +451,10 @@
     }
   }
 
+
   .text-wrapper {
-    width: calc(100% - 30px);
-    height: calc(100% - 40px);
+    width: calc(100% - 1.2rem);
+    height: calc(100% - 1rem);
     z-index: 2000;
 
     .hide {
@@ -426,24 +463,29 @@
     }
 
     .title {
-      font-size: 16px;
+      font-size: 0.4rem;
       line-height: 1.2;
-      padding-bottom: 20px;
+      padding-bottom: 0.5rem;
       transition: all 0.5s ease-in-out 1s;
+      display:flex;
+      &>div:first-child{
+        margin-right:.1rem;
+      }
     }
   }
 
   .top-left-sunlight-hide {
     transform: translate3d(0, -100%, 0) rotate(180deg) scale(2.5) !important;
+    opacity:0;
     transition: none !important;
   }
 
   .top-left-sunlight {
     position: absolute;
-    top: 10%;
-    left: 75%;
+    top: 2.2rem;
+    left: 30%;
     width: 100%;
-    height: 220px;
+    height: 3rem;
     transform: rotate(180deg) scale(2.5);
     background: no-repeat url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187619.png@!user_image_700x1");
     background-size: cover;
@@ -478,8 +520,8 @@
     position: absolute;
     bottom: 0;
     left: -20%;
-    width: 210px;
-    height: 251px;
+    width: 5rem;
+    height: 7rem;
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187886.png@!user_image_700x1");
     background-size: cover;
     transition: all 1.5s ease-in-out 0.5s;
@@ -496,8 +538,8 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 210px;
-    height: 251px;
+    width: 5rem;
+    height: 7rem;
     transform: rotate(30deg);
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187990.png@!user_image_700x1");
     background-size: cover;
@@ -519,23 +561,32 @@
     transition: none !important;
   }
 
+  .swiper-scrollbar{
+    width:.2rem !important;
+  }
+
   .el-checkbox {
-    border: 1px solid #798dc0;
-    border-radius: 2px;
+    border: 0.01rem solid #798dc0;
+    border-radius: .1rem;
     background: rgba(255, 255, 255, 1) !important;
     filter: opacity(1) !important;
-    margin: 10px 0;
-    padding: 4px;
-    box-shadow: 2px 2px 4px #a1a1a1;
+    margin: 0.2rem 0;
+    padding: 0.2rem;
+    box-shadow: .05rem 0.05rem .07rem #a1a1a1;
 
-    input {
-      visibility: hidden;
+    .el-checkbox__label{
+      margin-left:0.5rem;
     }
 
     .el-checkbox__input {
+      input {
+        display:none;
+        height: 0.3rem;
+        width: 0.3rem;
+      }
       &:after {
         background: no-repeat center url(https://oss3.rabbitpre.com/rp2/apps/static/widget/pageManagement/checkbox-bg_66eca2a.png);
-        background-size: 96% 90%;
+        background-size: 98% 96%;
         @include checkbox
       }
     }

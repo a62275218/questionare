@@ -8,6 +8,7 @@ import swiper from 'vue-awesome-swiper'
 import './css/reset.css'
 import 'swiper/dist/css/swiper.css'
 
+
 Vue.use(swiper);
 Vue.use(ElementUI);
 

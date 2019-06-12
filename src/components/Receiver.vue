@@ -2,7 +2,7 @@
   <div class="container">
     <div class="block" v-for="(item,idx) in data" :key="idx">
       <div class="title">{{idx+1 +' '+item.title}}</div>
-      <div v-for="i in item.model">
+      <div class="content" v-for="i in item.model">
         {{i}}
       </div>
     </div>
@@ -43,13 +43,14 @@
 
 <style scoped>
   .container{
-    padding:10px 20px;
+    padding:.4rem .3rem;
+    font-size:.3rem;
+    overflow:scroll;
+    color:#fff;
   }
-  .block{
-    padding:20px;
-  }
-  .title{
-    margin-left:-14px;
-    margin-bottom: 10px;
+  .content{
+    font-size:.2rem;
+    padding:.4rem;
+    transition:all 1s ease-in-out;
   }
 </style>

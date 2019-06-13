@@ -34,7 +34,7 @@
     mounted() {
       setTimeout(() => {
         this.animate = true
-      }, 0)
+      }, 6000)
     },
     methods: {
       navigateHome() {
@@ -45,9 +45,6 @@
 </script>
 
 <style scoped>
-  .preload-container{
-
-  }
   .navigator {
     position: absolute;
     top: 50%;
@@ -65,12 +62,12 @@
   .title {
     margin: 0 auto;
     font-size: .8rem;
-    font-family: "Qian Kun";
+    font-family: "cyjianxk19f4c1ea241ff64";
   }
 
   .content {
-    padding: .7rem;
-    font-family: "Qian Kun";
+    padding: .4rem;
+    font-family: "cyjianxk19f4c1ea241ff64";
   }
 
   .hide {
@@ -82,7 +79,7 @@
     font-size: .5rem;
     bottom: 0;
     right: .4rem;
-    font-family: "Callie Hand";
+    font-family:'SnellRoundhand';
     transition: all 1s ease-in-out 4s;
   }
 
@@ -96,6 +93,15 @@
     padding: .2rem;
     border-radius: .2rem;
     transition: all 1s ease-in-out 3s;
-    font-family: "Qian Kun";
+    font-family: "cyjianxk19f4c1ea241ff64";
+  }
+
+  @keyframes show {
+    from{
+      opacity:0
+    }
+    to{
+      opacity:1
+    }
   }
 </style>

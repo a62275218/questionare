@@ -1,10 +1,10 @@
 <template>
   <swiper :options="swiperOption" ref="mySwiper">
-    <swiper-slide v-for="(item,idx) in questionList" :key="item.title" class="swiper-slide">
+    <swiper-slide v-for="(item,idx) in questionList" :key="item.title" class="swiper-slide" >
       <div :class="['question-card',{'question-card-hide':hide}]">
         <div :class="['inner-card',{'inner-card-hide':hide}]">
           <div class="inner-border"></div>
-          <img v-show="item.model.length && idx!==questionList.length-1 && !complete" class="nextBtn"
+          <img class="nextBtn" v-show="item.model.length && idx!==questionList.length-1 && !complete"
                src="../assets/down.png" alt=""/>
           <div
             class="submit-btn"
@@ -21,35 +21,39 @@
             </div>
             <!--begin 复选框-->
             <!--<el-checkbox-group-->
-              <!--v-model="item.model"-->
-              <!--@change="e=>handleChange(e,item)"-->
+            <!--v-model="item.model"-->
+            <!--@change="e=>handleChange(e,item)"-->
             <!--&gt;-->
-              <!--<el-checkbox-->
-                <!--v-for="(option,i) in item.options"-->
-                <!--:label="option.label"-->
-                <!--:key="option.label"-->
-                <!--:class="{'check-box-hide':hide}"-->
-                <!--:style="`transition:all 0.5s ease-in-out ${1+i/10}s;${option.label.length>14?'text-align:center':''}`"-->
-              <!--&gt;-->
-                <!--{{option.label}}-->
-              <!--</el-checkbox>-->
+            <!--<el-checkbox-->
+            <!--v-for="(option,i) in item.options"-->
+            <!--:label="option.label"-->
+            <!--:key="option.label"-->
+            <!--:class="{'check-box-hide':hide}"-->
+            <!--:style="`transition:all 0.5s ease-in-out ${1+i/10}s;${option.label.length>14?'text-align:center':''}`"-->
+            <!--&gt;-->
+            <!--{{option.label}}-->
+            <!--</el-checkbox>-->
             <!--</el-checkbox-group>-->
+
             <van-checkbox-group
               v-model="item.model"
               @change="e=>handleChange(e,item)"
             >
-              <van-checkbox
-                v-for="(option, index) in item.options"
-                :key="option.label"
-                :name="option"
-                icon-size=".4rem"
-                shape="square"
-                checked-color="#f08b48"
-                :class="{'check-box-hide':hide}"
-                :style="`transition:all 0.5s ease-in-out ${1+i/10}s`"
-              >
-                {{option.label}}
-              </van-checkbox>
+              <transition-group name="list">
+                <van-checkbox
+                  v-if="!hide"
+                  v-for="(option, index) in item.options"
+                  :key="option.label"
+                  :name="option"
+                  icon-size=".4rem"
+                  shape="square"
+                  :id="index"
+                  :class="`delay${index}`"
+                  checked-color="#f08b48"
+                >
+                  {{option.label}}
+                </van-checkbox>
+              </transition-group>
             </van-checkbox-group>
             <!--end 复选框-->
           </div>
@@ -84,7 +88,7 @@
         oncustomsysmsg: function (sysMsg) {
           console.log('收到系统通知', sysMsg)
         }
-      })
+      });
     },
     data() {
       const _this = this;
@@ -118,15 +122,15 @@
             options: [
               {
                 label: '再长的队我都忍了',
-                key:'1'
+                key: '1'
               },
               {
                 label: '下次有机会再来',
-                key:'2'
+                key: '2'
               },
               {
                 label: '走人',
-                key:'3'
+                key: '3'
               },
             ],
             model: []
@@ -137,19 +141,19 @@
             options: [
               {
                 label: '不准黑我家坤坤',
-                key:'4'
+                key: '4'
               },
               {
                 label: '被黑是他活该',
-                key:'5'
+                key: '5'
               },
               {
                 label: '我只是个吃瓜的群众',
-                key:'6'
+                key: '6'
               },
               {
                 label: '蔡徐坤是谁？',
-                key:'7'
+                key: '7'
               }
             ],
             model: []
@@ -160,11 +164,11 @@
             options: [
               {
                 label: '马上想办法联系他，并且不看他手机内容',
-                key:'8'
+                key: '8'
               },
               {
                 label: '机会来了，看看他和哪个小妖精在聊骚',
-                key:'9'
+                key: '9'
               },
             ],
             model: []
@@ -175,27 +179,27 @@
             options: [
               {
                 label: '麦克学摇滚(Micheal Learns To Rock)',
-                key:'10'
+                key: '10'
               },
               {
                 label: '夜愿(Night Wish)',
-                key:'11'
+                key: '11'
               },
               {
                 label: '后弦',
-                key:'12'
+                key: '12'
               },
               {
                 label: '许嵩(Vae)',
-                key:'13'
+                key: '13'
               },
               {
                 label: '音阙诗听',
-                key:'14'
+                key: '14'
               },
               {
                 label: '毛不易',
-                key:'15'
+                key: '15'
               }
             ],
             model: []
@@ -206,30 +210,30 @@
             options: [
               {
                 label: '只有卡地亚配得上本仙女',
-                key:'16'
+                key: '16'
               },
               {
                 label: '我选择价格便宜的',
-                key:'17'
+                key: '17'
               },
             ],
             model: []
           },
           {
-            title: "每月一次血崩中，和男朋友哭诉，结果换来一句'多喝热水'",
+            title: "肚子疼，和男朋友哭诉，结果换来一句'多喝热水'",
             type: 'radio',
             options: [
               {
                 label: '老娘请你喝烫水',
-                key:'18'
+                key: '18'
               },
               {
                 label: '能怎么办？只能忍了',
-                key:'19'
+                key: '19'
               },
               {
                 label: '无所谓',
-                key:'20'
+                key: '20'
               }
             ],
             model: []
@@ -240,23 +244,23 @@
             options: [
               {
                 label: '巧了，我也是',
-                key:'21'
+                key: '21'
               },
               {
                 label: '不和沙雕做朋友',
-                key:'22'
+                key: '22'
               },
               {
                 label: '能怎么办？只能忍了',
-                key:'23'
+                key: '23'
               },
               {
                 label: '无所谓',
-                key:'24'
+                key: '24'
               },
               {
                 label: '沙雕是什么？',
-                key:'25'
+                key: '25'
               }
             ],
             model: []
@@ -267,19 +271,19 @@
             options: [
               {
                 label: '一口盐汽水喷死他',
-                key:'26'
+                key: '26'
               },
               {
                 label: '当然是一起玩了',
-                key:'27'
+                key: '27'
               },
               {
                 label: '想方设法转移他注意力',
-                key:'28'
+                key: '28'
               },
               {
                 label: '苦心规劝',
-                key:'29'
+                key: '29'
               }
             ],
             model: []
@@ -290,27 +294,27 @@
             options: [
               {
                 label: '哥斯拉2',
-                key:'30'
+                key: '30'
               },
               {
                 label: '皮卡丘大侦探',
-                key:'31'
+                key: '31'
               },
               {
                 label: '复仇者联盟4',
-                key:'32'
+                key: '32'
               },
               {
                 label: '蜘蛛侠:营销远征',
-                key:'33'
+                key: '33'
               },
               {
                 label: '全职高手之巅峰荣耀',
-                key:'34'
+                key: '34'
               },
               {
                 label: '哆啦A梦:大雄的月球探险记',
-                key:'35'
+                key: '35'
               }
             ],
             model: []
@@ -329,7 +333,6 @@
         if (item.type === 'radio' && item.model.length > 1) {
           item.model = [e[1]];
         }
-        console.log(item.model)
         const _this = this;
         let msgId = nim.sendCustomSysMsg({
           scene: 'p2p',
@@ -374,21 +377,26 @@
     transform: translate(0, -50%);
   }
 
+  @function transitionDelay($time) {
+    @return 'all 0.5s ease-in-out '+$time;
+  }
+
   .swiper-container {
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187136.png@!user_image_700x1");
     background-size: cover;
     font-size: 0.4rem;
-    height:100%;
-    font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+    height: 100%;
+    font-family: 'Microsoft Yahei', Tahoma, Helvetica, Arial, sans-serif;
   }
 
   .swiper-slide {
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187849.png@!user_image_700x1");
     background-size: cover;
     position: relative;
+    transform-style: preserve-3d;
 
     .question-card-hide {
-      transform: translate3d(-200%, -50%, 0);
+      transform: translate3d(-200%, -50%, 0) !important;
       transition: none !important;
     }
 
@@ -397,10 +405,10 @@
       height: 14rem;
       background: rgba(255, 255, 255, 0.3);
       z-index: 100;
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate3d(-50%,-50%,0);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
       transition: all 0.5s ease-in-out 0.5s;
 
       .inner-card-hide {
@@ -434,12 +442,13 @@
           width: 2rem;
           height: 1rem;
           transform: translate(-50%, 0);
-          z-index: 9000;
+          z-index: 10000;
           transition: all 2s ease-in-out;
           animation: updown 2s infinite;
           padding: 1rem;
           opacity: 0.6;
         }
+
         .submit-btn {
           position: absolute;
           left: 50%;
@@ -457,10 +466,12 @@
           z-index: 9000;
           box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.2);
         }
+
         .complete-hide {
           opacity: 0;
           transform: translate(-50%, -50%) scale(0);
         }
+
         .complete {
           position: absolute;
           left: 50%;
@@ -472,6 +483,7 @@
           background-size: cover;
           transition: all 1s ease-in-out;
         }
+
         .inner-border {
           position: absolute;
           top: 50%;
@@ -513,6 +525,7 @@
       padding-bottom: 0.5rem;
       transition: all 0.5s ease-in-out 1s;
       display: flex;
+
       & > div:first-child {
         margin-right: .1rem;
       }
@@ -530,7 +543,7 @@
     top: 2.2rem;
     left: 30%;
     width: 100%;
-    height: 3rem;
+    height: 2.8rem;
     transform: rotate(180deg) scale(2.5);
     background: no-repeat url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187619.png@!user_image_700x1");
     background-size: cover;
@@ -545,11 +558,13 @@
 
   .center-feather {
     position: absolute;
-    top: -40%;
-    left: -16%;
-    width: 130%;
-    height: 100%;
+    top:3%;
+    left:-15%;
+    height: 70%;
+    width:130%;
     background-image: url("https://file.rrxh5.cc/g2/c1/2019/06/05/1559718187847.png@!user_image_700x1");
+    background-position: bottom;
+    background-clip: content-box;
     background-size: cover;
     transition: all 0.5s ease-in-out;
   }
@@ -606,13 +621,15 @@
     width: .2rem !important;
   }
 
-  .el-checkbox-group{
-    display:flex;
+  .el-checkbox-group {
+    display: flex;
     flex-direction: column;
-    .el-checkbox__input{
-      margin-right:.2rem;
+
+    .el-checkbox__input {
+      margin-right: .2rem;
     }
-    & .is-checked + span{
+
+    & .is-checked + span {
       &:before {
         z-index: 9000;
         background: url(https://oss3.rabbitpre.com/rp2/apps/static/widget/pageManagement/checkbox-bg-h_fc9d504.png);
@@ -620,36 +637,64 @@
         @include checkbox
       }
     }
-    .el-checkbox__label:after{
-        background: no-repeat center url(https://oss3.rabbitpre.com/rp2/apps/static/widget/pageManagement/checkbox-bg_66eca2a.png);
-        background-size: 98% 96%;
-        @include checkbox
+
+    .el-checkbox__label:after {
+      background: no-repeat center url(https://oss3.rabbitpre.com/rp2/apps/static/widget/pageManagement/checkbox-bg_66eca2a.png);
+      background-size: 98% 96%;
+      @include checkbox
     }
-    .el-checkbox{
+
+    .el-checkbox {
       display: block;
       border: 0.01rem solid #798dc0;
-      margin:.2rem 0;
+      margin: .2rem 0;
       border-radius: .1rem;
       background: rgba(255, 255, 255, 1) !important;
       filter: opacity(1) !important;
       padding: 0.2rem;
       box-shadow: .05rem 0.05rem .07rem #a1a1a1;
+      transition: all 0.5s ease-in-out 4s;
     }
   }
 
-  .van-checkbox{
+  .list-enter-active, .list-leave-active {
+  }
+
+  .list-enter, .list-leave-to
+    /* .list-leave-active for below version 2.1.8 */
+  {
+    opacity: 0;
+    transform: translate3d(-200%, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  .van-checkbox {
     border: 0.01rem solid #798dc0;
-    margin:.2rem 0;
+    margin: .2rem 0;
     border-radius: .1rem;
     background: rgba(255, 255, 255, 1) !important;
     filter: opacity(1) !important;
     padding: 0.2rem;
     box-shadow: .05rem 0.05rem .07rem #a1a1a1;
-    .van-checkbox__label{
-      color:#798dc0 !important;
-      width:100%;
-      line-height:1.1
+
+    .van-checkbox__label {
+      color: #798dc0 !important;
+      width: 100%;
+      line-height: 1.1
     }
+  }
+
+  .van-checkbox__icon .van-icon {
+    border: 4px solid #798dc0;
+  }
+
+  $i: 0;
+  @while $i < 20 {
+    .delay#{$i} {
+      transition: all 0.5s ease-in-out #{($i+2)/4+1}s;
+    }
+    $i: $i + 1;
   }
 
 </style>

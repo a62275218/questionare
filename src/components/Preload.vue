@@ -26,7 +26,9 @@
         contentList: [
           '本问卷只是为了互相了解',
           '不涉及任何择偶标准',
-          '问卷的设计、取材、开发全由我个人完成',
+          '问卷的设计,取材,开发全由我个人完成',
+          '开启了即时通讯机制',
+          '不用在做的时候告诉我选了什么',
           '纯属娱乐，如有雷同，纯属巧合'
         ]
       }
@@ -62,12 +64,10 @@
   .title {
     margin: 0 auto;
     font-size: .8rem;
-    font-family: "cyjianxk19f4c1ea241ff64";
   }
 
   .content {
-    padding: .4rem;
-    font-family: "cyjianxk19f4c1ea241ff64";
+    padding: .2rem;
   }
 
   .hide {
@@ -80,7 +80,7 @@
     bottom: 0;
     right: .4rem;
     font-family:'SnellRoundhand';
-    transition: all 1s ease-in-out 4s;
+    transition: all 1s ease-in-out 6s;
   }
 
   .content-row {
@@ -92,7 +92,7 @@
     border: .04rem solid #fff;
     padding: .2rem;
     border-radius: .2rem;
-    transition: all 1s ease-in-out 3s;
+    transition: all 1s ease-in-out 5s;
     font-family: "cyjianxk19f4c1ea241ff64";
   }
 

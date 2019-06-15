@@ -93,7 +93,6 @@
     padding: .2rem;
     border-radius: .2rem;
     transition: all 1s ease-in-out 5s;
-    font-family: "cyjianxk19f4c1ea241ff64";
   }
 
   @keyframes show {

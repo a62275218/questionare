@@ -174,6 +174,25 @@
             model: []
           },
           {
+            title: '逛超市时你会',
+            type: 'radio',
+            options: [
+              {
+                label: '认准自己喜欢的商品购买',
+                key: '58'
+              },
+              {
+                label: '不断尝试新的商品',
+                key: '59'
+              },
+              {
+                label: '看情况购买没买过的',
+                key: '60'
+              },
+            ],
+            model: []
+          },
+          {
             title: '以下歌手/乐队知道哪些?',
             type: 'checkbox',
             options: [
@@ -345,6 +364,87 @@
               {
                 label: '保持中立',
                 key: '41'
+              },
+            ],
+            model: []
+          },{
+            title: '以下哪些动漫是你的童年？',
+            type: 'checkbox',
+            options: [
+              {
+                label: '神奇宝贝/数码宝贝',
+                key: '42'
+              },
+              {
+                label: '七龙珠',
+                key: '43'
+              },
+              {
+                label: '美少女战士/魔卡少女樱',
+                key: '44'
+              },
+              {
+                label: '名侦探柯南',
+                key: '45'
+              },
+              {
+                label: '四驱兄弟',
+                key: '46'
+              },
+              {
+                label: '中华小当家',
+                key: '47'
+              },
+              {
+                label: '新世纪福音战士',
+                key: '48'
+              },
+              {
+                label: '喜羊羊与灰太狼',
+                key: '49'
+              },
+              {
+                label: '我的童年被狗吃了',
+                key: '50'
+              },
+            ],
+            model: []
+          },
+          {
+            title: '愿意去尝试哪些运动？',
+            type: 'checkbox',
+            options: [
+              {
+                label: '羽毛球',
+                key: '51'
+              },
+              {
+                label: '网球',
+                key: '52'
+              },
+              {
+                label: '篮球',
+                key: '57'
+              },
+              {
+                label: '乒乓球',
+                key: '53'
+              },
+              {
+                label: '桌球',
+                key: '54'
+              },
+              {
+                label: '滑冰',
+                key: '55'
+              },
+              {
+                label: '卡丁车',
+                key: '56'
+              },
+              {
+                label: '都不喜欢',
+                key: '61'
               },
             ],
             model: []

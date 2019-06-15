@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <div class="block" v-for="(item,idx) in data" :key="idx">
-      <div class="title">{{idx+1 +' '+item.title}}</div>
-      <div class="content" v-for="i in item.model">
-        {{i.label}}
+    <div class="scroll">
+      <div class="block" v-for="(item,idx) in data" :key="idx">
+        <div class="title">{{idx+1 +' '+item.title}}</div>
+        <div class="content" v-for="i in item.model">
+          {{i.label}}
+        </div>
       </div>
     </div>
   </div>
@@ -47,10 +49,17 @@
     font-size:.3rem;
     overflow:scroll;
     color:#fff;
+    position:relative;
+    height:85%;
+  }
+  .scroll{
+    position:absolute;
+    top:0;
+    left:0
   }
   .content{
-    font-size:.2rem;
-    padding:.4rem;
+    font-size:.3rem;
+    padding:.1rem;
     transition:all 1s ease-in-out;
   }
 </style>

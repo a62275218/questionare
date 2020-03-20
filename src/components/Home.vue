@@ -315,15 +315,15 @@ export default {
           type: "checkbox",
           options: [
             {
-              label: "唐人街探案3",
+              label: "速度与激情9",
               key: "30"
             },
             {
-              label: "姜子牙",
+              label: "奇妙王国指魔法奇缘",
               key: "31"
             },
             {
-              label: "动物特工局",
+              label: "山村怪谈",
               key: "32"
             },
             {

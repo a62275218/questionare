@@ -134,24 +134,20 @@ export default {
           model: []
         },
         {
-          title: "蔡徐坤被黑得挺惨的，你怎么看？",
+          title: "对于情侣送礼物这件事你是怎么看的",
           type: "radio",
           options: [
             {
-              label: "不准黑我家坤坤",
+              label: "仪式感很重要，关键纪念日，情人节必须有礼物",
               key: "4"
             },
             {
-              label: "被黑是他活该",
+              label: "送礼不在于某个特定时间，放在更有需要的时候送更好",
               key: "5"
             },
             {
-              label: "我只是个吃瓜的群众",
+              label: "并不在乎形式",
               key: "6"
-            },
-            {
-              label: "蔡徐坤是谁？",
-              key: "7"
             }
           ],
           model: []
@@ -215,7 +211,7 @@ export default {
               key: "14"
             },
             {
-              label: "毛不易",
+              label: "泽野弘之",
               key: "15"
             }
           ],
@@ -242,7 +238,7 @@ export default {
           type: "radio",
           options: [
             {
-              label: "老娘请你喝烫水",
+              label: "老娘请你喝岩浆",
               key: "18"
             },
             {
@@ -306,45 +302,6 @@ export default {
             {
               label: "苦心规劝",
               key: "29"
-            }
-          ],
-          model: []
-        },
-        {
-          title: "最近上映的电影，对哪些比较感兴趣？",
-          type: "checkbox",
-          options: [
-            {
-              label: "速度与激情9",
-              key: "30"
-            },
-            {
-              label: "奇妙王国指魔法奇缘",
-              key: "31"
-            },
-            {
-              label: "山村怪谈",
-              key: "32"
-            },
-            {
-              label: "星球大战:天行者崛起",
-              key: "33"
-            },
-            {
-              label: "海上钢琴师",
-              key: "34"
-            },
-            {
-              label: "叶问4",
-              key: "36"
-            },
-            {
-              label: "宠爱",
-              key: "37"
-            },
-            {
-              label: "没一个喜欢的",
-              key: "38"
             }
           ],
           model: []

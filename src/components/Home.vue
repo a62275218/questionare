@@ -181,7 +181,7 @@ export default {
               key: "8",
             },
             {
-              label: "机会来了，看看他和哪个小妖精在聊骚",
+              label: "机会来了，看看他有没有对我不忠",
               key: "9",
             },
           ],
@@ -254,51 +254,63 @@ export default {
           model: [],
         },
         {
-          title: "肚子疼，和男朋友哭诉，结果换来一句'多喝热水'",
-          type: "radio",
+          title: "常用的平台有哪些",
+          type: "checkbox",
           options: [
             {
-              label: "老娘请你喝岩浆",
+              label: "b站",
               key: "18",
             },
             {
-              label: "这么关心我真是太好了",
+              label: "知乎",
               key: "35",
             },
             {
-              label: "能怎么办？只能忍了",
+              label: "豆瓣",
               key: "19",
             },
             {
-              label: "无所谓",
+              label: "头条",
+              key: "20",
+            },
+            {
+              label: "抖音",
+              key: "20",
+            },
+            {
+              label: "Instagram",
+              key: "20",
+            },
+            {
+              label: "Facebook",
+              key: "20",
+            },
+            {
+              label: "Twitter",
               key: "20",
             },
           ],
           model: [],
         },
         {
-          title: "和男朋友相处久了，发现对方是个沙雕",
+          title: "男友的一个小举动让你感到不适",
           type: "radio",
           options: [
             {
-              label: "巧了，我也是",
+              label: "表面无事发生, 内心mmp",
               key: "21",
             },
             {
-              label: "不和沙雕做朋友",
+              label: "面露不悦，希望对方能察言观色",
               key: "22",
             },
             {
-              label: "能怎么办？只能忍了",
+              label: "找合适的机会沟通这个问题",
               key: "23",
             },
             {
-              label: "无所谓",
+              label: "当场提出并告诉他",
               key: "24",
-            },
-            {
-              label: "沙雕是什么？",
-              key: "25",
             },
           ],
           model: [],
@@ -327,7 +339,7 @@ export default {
           model: [],
         },
         {
-          title: "对当今流行的视频弹幕看法？",
+          title: "对视频弹幕的看法？",
           type: "radio",
           options: [
             {
@@ -382,7 +394,7 @@ export default {
               key: "49",
             },
             {
-              label: "我的童年被狗吃了",
+              label: "都没有看过",
               key: "50",
             },
           ],

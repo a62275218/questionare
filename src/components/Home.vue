@@ -1,25 +1,35 @@
 <template>
   <swiper :options="swiperOption" ref="mySwiper">
-    <swiper-slide v-for="(item,idx) in questionList" :key="item.title" class="swiper-slide">
-      <div :class="['question-card',{'question-card-hide':hide}]">
-        <div :class="['inner-card',{'inner-card-hide':hide}]">
+    <swiper-slide
+      v-for="(item, idx) in questionList"
+      :key="item.title"
+      class="swiper-slide"
+    >
+      <div :class="['question-card', { 'question-card-hide': hide }]">
+        <div :class="['inner-card', { 'inner-card-hide': hide }]">
           <div class="inner-border"></div>
           <img
             class="nextBtn"
-            v-show="item.model.length && idx!==questionList.length-1 && !complete"
+            v-show="
+              item.model.length && idx !== questionList.length - 1 && !complete
+            "
             src="../assets/down.png"
             alt
           />
           <div
             class="submit-btn"
-            v-show="idx===questionList.length-1 && !complete && item.model.length"
+            v-show="
+              idx === questionList.length - 1 && !complete && item.model.length
+            "
             @click="submit()"
-          >提交</div>
-          <div :class="['complete',{'complete-hide':!complete}]"></div>
+          >
+            提交
+          </div>
+          <div :class="['complete', { 'complete-hide': !complete }]"></div>
           <div class="text-wrapper">
-            <div :class="['title',{hide:hide}]">
-              <div>{{idx+1}}.</div>
-              <div>{{item.title}}</div>
+            <div :class="['title', { hide: hide }]">
+              <div>{{ idx + 1 }}.</div>
+              <div>{{ item.title }}</div>
             </div>
             <!--begin 复选框-->
             <!--<el-checkbox-group-->
@@ -37,7 +47,10 @@
             <!--</el-checkbox>-->
             <!--</el-checkbox-group>-->
 
-            <van-checkbox-group v-model="item.model" @change="e=>handleChange(e,item)">
+            <van-checkbox-group
+              v-model="item.model"
+              @change="(e) => handleChange(e, item)"
+            >
               <transition-group name="list">
                 <van-checkbox
                   v-if="!hide"
@@ -49,17 +62,24 @@
                   :id="index"
                   :class="`delay${index}`"
                   checked-color="#f08b48"
-                >{{option.label}}</van-checkbox>
+                  >{{ option.label }}</van-checkbox
+                >
               </transition-group>
             </van-checkbox-group>
             <!--end 复选框-->
           </div>
         </div>
       </div>
-      <div :class="['top-left-sunlight',{'top-left-sunlight-hide':hide}]"></div>
-      <div :class="['center-feather',{'center-feather-hide':hide}]"></div>
-      <div :class="['bot-left-feather',{'bot-left-feather-hide':hide}]"></div>
-      <div :class="['bot-right-feather',{'bot-right-feather-hide':hide}]"></div>
+      <div
+        :class="['top-left-sunlight', { 'top-left-sunlight-hide': hide }]"
+      ></div>
+      <div :class="['center-feather', { 'center-feather-hide': hide }]"></div>
+      <div
+        :class="['bot-left-feather', { 'bot-left-feather-hide': hide }]"
+      ></div>
+      <div
+        :class="['bot-right-feather', { 'bot-right-feather-hide': hide }]"
+      ></div>
     </swiper-slide>
     <div class="swiper-scrollbar" slot="scrollbar"></div>
   </swiper>
@@ -76,15 +96,15 @@ export default {
       appKey: "d8201c00ad3022a6bae5d14954b30605",
       account: "a62275218",
       token: "66d76e593a3ca3541f18f092aef999f8",
-      onconnect: function() {
+      onconnect: function () {
         console.log("SDK连接成功");
       },
-      onerror: function(err) {
+      onerror: function (err) {
         console.log(err);
       },
-      oncustomsysmsg: function(sysMsg) {
+      oncustomsysmsg: function (sysMsg) {
         console.log("收到系统通知", sysMsg);
-      }
+      },
     });
   },
   data() {
@@ -94,23 +114,23 @@ export default {
       swiperOption: {
         direction: "vertical",
         on: {
-          init: function() {
+          init: function () {
             _this.hide = false;
           },
-          transitionStart: function() {
+          transitionStart: function () {
             _this.hide = true;
           },
-          transitionEnd: function() {
+          transitionEnd: function () {
             _this.hide = false;
-          }
+          },
         },
         scrollbar: {
           el: ".swiper-scrollbar",
-          draggable: true
+          draggable: true,
         },
         navigation: {
-          nextEl: ".nextBtn"
-        }
+          nextEl: ".nextBtn",
+        },
       },
       questionList: [
         {
@@ -120,37 +140,37 @@ export default {
           options: [
             {
               label: "再长的队我都忍了",
-              key: "1"
+              key: "1",
             },
             {
               label: "下次有机会再来",
-              key: "2"
+              key: "2",
             },
             {
               label: "走人~",
-              key: "3"
-            }
+              key: "3",
+            },
           ],
-          model: []
+          model: [],
         },
         {
-          title: "对于情侣送礼物这件事你是怎么看的",
+          title: "更看重礼物的价格还是心意",
           type: "radio",
           options: [
             {
-              label: "仪式感很重要，关键纪念日，情人节必须有礼物",
-              key: "4"
+              label: "价格",
+              key: "4",
             },
             {
-              label: "送礼不在于某个特定时间，放在更有需要的时候送更好",
-              key: "5"
+              label: "心意",
+              key: "5",
             },
             {
-              label: "并不在乎形式",
-              key: "6"
-            }
+              label: "都很重要",
+              key: "6",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title: "男朋友出门忘带手机了，还没锁屏，你会?",
@@ -158,14 +178,14 @@ export default {
           options: [
             {
               label: "马上想办法联系他，并且不看他手机内容",
-              key: "8"
+              key: "8",
             },
             {
               label: "机会来了，看看他和哪个小妖精在聊骚",
-              key: "9"
-            }
+              key: "9",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title: "逛超市时你会",
@@ -173,18 +193,18 @@ export default {
           options: [
             {
               label: "认准自己喜欢的商品购买",
-              key: "58"
+              key: "58",
             },
             {
               label: "不断尝试新的商品",
-              key: "59"
+              key: "59",
             },
             {
               label: "看情况购买没买过的",
-              key: "60"
-            }
+              key: "60",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title: "以下歌手/乐队知道哪些?",
@@ -192,30 +212,30 @@ export default {
           options: [
             {
               label: "麦克学摇滚(Micheal Learns To Rock)",
-              key: "10"
+              key: "10",
             },
             {
               label: "夜愿(Night Wish)",
-              key: "11"
+              key: "11",
             },
             {
               label: "后弦",
-              key: "12"
+              key: "12",
             },
             {
               label: "许嵩(Vae)",
-              key: "13"
+              key: "13",
             },
             {
               label: "音阙诗听",
-              key: "14"
+              key: "14",
             },
             {
               label: "泽野弘之",
-              key: "15"
-            }
+              key: "15",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title:
@@ -224,14 +244,14 @@ export default {
           options: [
             {
               label: "只有卡地亚配得上本仙女",
-              key: "16"
+              key: "16",
             },
             {
               label: "我选择价格便宜的",
-              key: "17"
-            }
+              key: "17",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title: "肚子疼，和男朋友哭诉，结果换来一句'多喝热水'",
@@ -239,22 +259,22 @@ export default {
           options: [
             {
               label: "老娘请你喝岩浆",
-              key: "18"
+              key: "18",
             },
             {
               label: "这么关心我真是太好了",
-              key: "35"
+              key: "35",
             },
             {
               label: "能怎么办？只能忍了",
-              key: "19"
+              key: "19",
             },
             {
               label: "无所谓",
-              key: "20"
-            }
+              key: "20",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title: "和男朋友相处久了，发现对方是个沙雕",
@@ -262,49 +282,49 @@ export default {
           options: [
             {
               label: "巧了，我也是",
-              key: "21"
+              key: "21",
             },
             {
               label: "不和沙雕做朋友",
-              key: "22"
+              key: "22",
             },
             {
               label: "能怎么办？只能忍了",
-              key: "23"
+              key: "23",
             },
             {
               label: "无所谓",
-              key: "24"
+              key: "24",
             },
             {
               label: "沙雕是什么？",
-              key: "25"
-            }
+              key: "25",
+            },
           ],
-          model: []
+          model: [],
         },
         {
-          title: "上班回家看到男朋友在家打游戏",
+          title: "对游戏的看法是?",
           type: "radio",
           options: [
             {
-              label: "一口盐汽水喷死他",
-              key: "26"
+              label: "什么鬼东西，浪费时间",
+              key: "26",
             },
             {
-              label: "当然是一起玩了",
-              key: "27"
+              label: "能接受，但我不会玩",
+              key: "27",
             },
             {
-              label: "想方设法转移他注意力",
-              key: "28"
+              label: "偶尔会玩玩",
+              key: "28",
             },
             {
-              label: "苦心规劝",
-              key: "29"
-            }
+              label: "还挺热衷的",
+              key: "29",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title: "对当今流行的视频弹幕看法？",
@@ -312,18 +332,18 @@ export default {
           options: [
             {
               label: "增加了观众的互动，乐意接受",
-              key: "39"
+              key: "39",
             },
             {
               label: "太乱了，果断关掉",
-              key: "40"
+              key: "40",
             },
             {
               label: "保持中立",
-              key: "41"
-            }
+              key: "41",
+            },
           ],
-          model: []
+          model: [],
         },
         {
           title: "以下哪些动漫是你的童年？",
@@ -331,57 +351,58 @@ export default {
           options: [
             {
               label: "神奇宝贝/数码宝贝",
-              key: "42"
+              key: "42",
             },
             {
               label: "七龙珠",
-              key: "43"
+              key: "43",
             },
             {
               label: "美少女战士/魔卡少女樱",
-              key: "44"
+              key: "44",
             },
             {
               label: "名侦探柯南",
-              key: "45"
+              key: "45",
             },
             {
               label: "四驱兄弟",
-              key: "46"
+              key: "46",
             },
             {
               label: "中华小当家",
-              key: "47"
+              key: "47",
             },
             {
               label: "新世纪福音战士",
-              key: "48"
+              key: "48",
             },
             {
               label: "喜羊羊与灰太狼",
-              key: "49"
+              key: "49",
             },
             {
               label: "我的童年被狗吃了",
-              key: "50"
-            }
+              key: "50",
+            },
           ],
-          model: []
+          model: [],
         },
         {
-          title: "到下班时间了，周围同事都在加班，而你又忙完了手头的活，这时候你会？",
+          title:
+            "到下班时间了，周围同事都在加班，而你又忙完了手头的活，这时候你会？",
           type: "radio",
-          options:[
+          options: [
             {
               label: "跟着一起加班",
-              key: "62"
+              key: "62",
             },
             {
               label: "果断走人",
-              key: "63"
+              key: "63",
             },
           ],
-          model: []
+          model: [],
         },
         {
           title: "愿意去尝试哪些运动？",
@@ -389,47 +410,47 @@ export default {
           options: [
             {
               label: "羽毛球",
-              key: "51"
+              key: "51",
             },
             {
               label: "网球",
-              key: "52"
+              key: "52",
             },
             {
               label: "篮球",
-              key: "57"
+              key: "57",
             },
             {
               label: "乒乓球",
-              key: "53"
+              key: "53",
             },
             {
               label: "桌球",
-              key: "54"
+              key: "54",
             },
             {
               label: "滑冰",
-              key: "55"
+              key: "55",
             },
             {
               label: "卡丁车",
-              key: "56"
+              key: "56",
             },
             {
               label: "都不喜欢",
-              key: "61"
-            }
+              key: "61",
+            },
           ],
-          model: []
-        }
+          model: [],
+        },
       ],
-      complete: false
+      complete: false,
     };
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
-    }
+    },
   },
   methods: {
     handleChange(e, item) {
@@ -442,9 +463,9 @@ export default {
         to: "b62275218",
         content: JSON.stringify(_this.questionList),
         sendToOnlineUsersOnly: false,
-        done: function(error, msg) {
+        done: function (error, msg) {
           if (error) console.log(error);
-        }
+        },
       });
       console.log("正在发送p2p自定义系统通知");
     },
@@ -456,13 +477,13 @@ export default {
         to: "b62275218",
         content: JSON.stringify(_this.questionList),
         sendToOnlineUsersOnly: false,
-        done: function(error, msg) {
+        done: function (error, msg) {
           if (error) console.log(error);
-        }
+        },
       });
       console.log("正在发送p2p自定义系统通知");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -766,8 +787,7 @@ export default {
 }
 
 .list-enter, .list-leave-to
-    /* .list-leave-active for below version 2.1.8 */
- {
+    /* .list-leave-active for below version 2.1.8 */ {
   opacity: 0;
   transform: translate3d(-200%, 0, 0);
   backface-visibility: hidden;
